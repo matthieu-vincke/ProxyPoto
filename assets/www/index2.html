@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geolocation test</title>
+
+<script type="text/javascript" src="phonegap.js"></script>
+<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+
+<script type="text/javascript" >  
+       var minimumAccuracy = 50; // Minimum accuracy in metres to accept as a reliable position
+		var watchID = null;
+		
+	    // Attendre que PhoneGap soit prêt
+	    //
+    	document.addEventListener("deviceready", onDeviceReady, false);
+		
+	    function alertDismissed() {
+	        // Faire quelque chose
+	    }
+	    
+	    // PhoneGap est prêt
+	    //
+	    function onDeviceReady() {	    			
+	    	setupWatch(15000);
+	  //  	console.log("MyActivity On device ready");	    	
+	    }
+	    						
+		// sets up the interval at the specified frequency
+		function setupWatch(freq) {
+		    // global var here so it can be cleared on logout (or whenever).
+		    activeWatch = setInterval(watchLocation, freq);
+		}
+
+	    
+		function watchLocation() {		       	       
+		   watchID = navigator.geolocation.getCurrentPosition (successCallback, errorCallback, {timeout: 10000});		
+		}
+
+        function successCallback(position){
+	     //   console.log("MyActivity Success " + position.coords.latitude + ' ' + position.coords.longitude );
+				        
+			navigator.notification.alert(
+					    'You are the winner!'+ position.coords.latitude + ' ' + position.coords.longitude,  // message
+					    alertDismissed,         // callback
+					    'Game Over',            // title
+					    'Done'                  // buttonName
+					);   	        
+
+        }
+
+        function errorCallback(error){
+	        			navigator.notification.alert(
+					    'You are the loser!'+ error.message + ' ' + error.code,  // message
+					    alertDismissed,         // callback
+					    'Game Over',            // title
+					    'Done'                  // buttonName
+					);   	 
+        }
+		        
+		function alertDismissed() {
+		    // do something
+		}
+		
+		     
+
+</script>
+</head>
+<body>
+<p>Latitude: <span id="lat"></span></p>
+<p>Longitude: <span id="lon"></span></p>
+<p>Accuracy: <span id="accuracy"></span></p>
+<p>Accurate?: <span id="accurate"></span></p>
+<hr/>
+<p>Error: <span id="error"></span></p>
+</body>
+</html>

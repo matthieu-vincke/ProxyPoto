@@ -1,0 +1,5 @@
+<plugins>
+	<plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
+	<plugin name="Geolocation" value="org.apache.cordova.GeoBroker" />
+	<plugin name="Camera" value="org.apache.cordova.CameraLauncher" />
+</plugins>
