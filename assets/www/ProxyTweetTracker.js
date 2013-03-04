@@ -17,6 +17,12 @@ function doWhenReady() {
 	var refreshIntervalId = null;
 	var loginToken = null;
 	
+	// Init the position
+	getLocation();
+	
+	// Add the position get periodic
+	setupWatch(5000);
+	
     function log(text){
 		console.log(text); 	     
     }
@@ -67,13 +73,15 @@ function doWhenReady() {
 	$("#login_start").live("click",function(){	
 		var login = $("#login_id").val();
 		var password = $("#password_id").val();
-			
+		
+		// Force a getlocation in case of a change of network option that has not been taken into account
+		getLocation();
+		
        ajaxLogin(login,password,function(e,res){
               if(e) return alertuser("login error : " + e.responseText);
               log("login ok, token: " + res.token);
-              loginToken = res.token;
-			  setupWatch(5000);
-			  alertuser("Log in - Done");
+              loginToken = res.token;			  			  
+			  $.mobile.changePage("#proxytweet", {transition: "slide"});
         });               
 	});
 	
@@ -86,7 +94,8 @@ function doWhenReady() {
 		ajaxSignup(login,password,mail,name,function(e,o){
 	        if(e) return alertuser("signup error : " + e.responseText);
 	        log("signup ok");
-	        alertuser("Sign up - Done");
+	        alertuser("You are now registered! Please login.");
+			$.mobile.changePage("#login", {transition: "slide"});			
 	       });
 	});	        
         
@@ -94,14 +103,21 @@ function doWhenReady() {
 	    refreshIntervalId = setInterval(getLocation, freq);
 	}
 	
-	function getLocation() {		       	       
-	   watch_id = navigator.geolocation.getCurrentPosition (successCallback, errorCallback, {timeout: 10000});		
+	function getLocation() {		
+	   var selectedoption =	$("#howtogetpos")[0].selectedIndex;
+	          	  
+	   log("selected position option is: " + selectedoption);   
+	   
+	   if(selectedoption == 1)
+	   	watch_id = navigator.geolocation.getCurrentPosition (successCallback, errorCallback, {timeout: 10000,enableHighAccuracy:true});		
+	   else
+	   	watch_id = navigator.geolocation.getCurrentPosition (successCallback, errorCallback, {timeout: 10000});
 	}
 
     function successCallback(position){
         console.log("Success GetPosition" + position.coords.latitude + ' ' + position.coords.longitude );			  
      
-		$("#login_info").html('Your position \n\r Latitude: <strong>' + position.coords.latitude + '</strong> et Longitude <strong>' + position.coords.longitude + '</strong>');
+		$("#position_info").html('Your position \n\r Latitude: <strong>' + position.coords.latitude + '</strong> et Longitude <strong>' + position.coords.longitude + '</strong>');
 						
 		tracking_data=position;  	    		    
     }
@@ -109,8 +125,11 @@ function doWhenReady() {
     function errorCallback(error){
 		console.log("Fail GetPosition" + error.code + ' ' + error.message );
     }
-        
-
+        	
+	$("#signup_btn").live("click",function(){				
+		$.mobile.changePage("#signup", {transition: "slide"});
+	});
+	
 	$("#login_stop").live("click",function(){	
 		// Stop tracking the user
 		navigator.geolocation.clearWatch(watch_id);	
@@ -120,7 +139,8 @@ function doWhenReady() {
 		
 		loginToken = null;
 		
-		alertuser("Sign out - Done");
+		alertuser("You are logged out!");
+		$.mobile.changePage("#login", {transition: "slide"});
 	});
 
 	// When the user views the Track Info page
@@ -128,6 +148,9 @@ function doWhenReady() {
 		getTweets();
 	});
 
+	$('#login').live("pageshow",function(){
+		
+	});	
 
 	$("#posttweet").live("click",function(){
 		var tweetmessage = $("#tweet_message_id").val();
@@ -154,7 +177,8 @@ function doWhenReady() {
 				$.each(data,function(i){
 					if(i < 5){
 						var tweet = data[i];
-						$("#proxytweet_list").append($('<li/>').html('Tweet -' + i + '-' + tweet.date + '-' + tweet.user + '-' + tweet.text));
+						var nb = 5-i;
+						$("#proxytweet_list").append($('<li/>').html('Tweet -' +  nb + '-' + tweet.date + '-' + tweet.user + '-' + tweet.text));
 					}
 				});
 				$("#proxytweet_list").listview('refresh'); 	      
@@ -162,7 +186,8 @@ function doWhenReady() {
 	    }
 	    else
 	    {
-	    	alertuser("Not logged or no position");
+	    	alertuser("No position! How is your network reception?!");
+	    	$.mobile.changePage("#login", {transition: "slide"});
 	    }	
 	}
 }

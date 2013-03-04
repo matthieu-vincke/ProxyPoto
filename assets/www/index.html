@@ -10,138 +10,105 @@
 	<link rel="stylesheet" href="jquery.mobile-1.1.0.min.css" />
 </head>
 <body>
-<!-- Start of Home page -->
-<div data-role="page" id="Home">
+
+<!-- Start of login page -->
+<div data-role="page" id="login">
 
 	<div data-role="header">
-	
-		<h1>Home</h1>
-	
-		<div data-role="navbar">
-			<ul>
-				<li><a href="#home" data-transition="none" data-icon="home">Home</a></li>
-				<li><a href="#signup" data-transition="none" data-icon="plus">Signup</a></li>
-				<li><a href="#login" data-transition="none" data-icon="arrow-d">Login</a></li>				
-				<li><a href="#proxytweet" data-transition="none" data-icon="gear">Proxy Tweets</a></li>
-			</ul>
+		<h1>ProxyTweets</h1>
+	</div>
+
+	<div data-role="content">	
+		<h2>Login for local Tweets!</h2>
+		<div data-role="fieldcontain" class="ui-hide-label">
+			<label for="login_id_login_idlabel">login:</label>
+			<input type="text" name="login" id="login_id" placeholder="login"/>
+			<label for="password_id">Password:</label>
+			<input type="password"  name="password" id="password_id" placeholder="Password"/>				
 		</div>
-	</div>
 
-	<div data-role="content">
-		<p>Welcome to the <em>ProxyPoto</em> app. login and Enjoy!</p>
+		<button data-role="button" id="login_start" data-icon="check" data-theme="b" >Login</button>			
+		<br/>
+		<label for="howtogetpos">How do you wish to get the position?</label>
+		<select name="howtogetpos" id="howtogetpos"  data-role="none">
+			<option value="networkposition">Network Position</option>
+			<option value="gpsposition">Gps Position</option>
+		</select>	
+		<br/>	
+		<hr/>
+		<br/>
+		<button data-role="button" id="signup_btn" data-icon="plus" data-theme="e">Signup</button>
+		<br/>		
+	</div>
 	
-		<button id="home_network_button" data-icon="check">Internet Access Enabled</button>
-	</div>
-
-
-</div>
-<!-- End of Home page -->
+	<div data-role="footer">
+		<span style="float:right;color:black"><h4>2013 - ProxyTweet POC</h4></span>
+	</div>	
+</div><!-- /page -->
 
 
 <!-- Start of signup page -->
 <div data-role="page" id="signup">
 
 	<div data-role="header">
-		<h1>Sign Up</h1>
-		
-		<div data-role="navbar">
-			<ul>
-				<li><a href="#home" data-transition="none" data-icon="home">Home</a></li>
-				<li><a href="#signup" data-transition="none" data-icon="plus">Signup</a></li>
-				<li><a href="#login" data-transition="none" data-icon="arrow-d">Login</a></li>				
-				<li><a href="#proxytweet" data-transition="none" data-icon="gear">Proxy Tweets</a></li>
-			</ul>
-		</div>
+		<h1>ProxyTweets</h1>	
+		<a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Back</a>	
 	</div>
 
 	<div data-role="content">	
-		<p id="login_status"></p>
-			<div data-role="fieldcontain" class="ui-hide-label">
-				<label for="sign_login_id">login:</label>
-				<input type="text" name="sign_login" id="sign_login_id" placeholder="login"/>
-				<label for="sign_password_id">Password:</label>
-				<input type="text" name="sign_password" id="sign_password_id" placeholder="Password"/>				
-				<label for="sign_mail_id">Mail:</label>
-				<input type="text" name="sign_mail" id="sign_mail_id" placeholder="mail"/>		
-				<label for="sign_name_id">Name:</label>
-				<input type="text" name="sign_name" id="sign_name_id" placeholder="name"/>		
-			</div>
-
-			<button data-role="button" id="signup_start" data-icon="plus">Signup</button>			
-		
-	</div>
-
-
-</div><!-- /page -->
-
-
-<!-- Start of login page -->
-<div data-role="page" id="login">
-
-	<div data-role="header">
-		<h1>Login</h1>
-		
-		<div data-role="navbar">
-			<ul>
-				<li><a href="#home" data-transition="none" data-icon="home">Home</a></li>
-				<li><a href="#signup" data-transition="none" data-icon="plus">Signup</a></li>
-				<li><a href="#login" data-transition="none" data-icon="arrow-d">Login</a></li>				
-				<li><a href="#proxytweet" data-transition="none" data-icon="gear">Proxy Tweets</a></li>
-			</ul>
+		<h2>Signup for local Tweets!</h2>
+		<br/>
+		<div data-role="fieldcontain" class="ui-hide-label">
+			<label for="sign_login_id">login:</label>
+			<input type="text" name="sign_login" id="sign_login_id" placeholder="login"/>
+			<label for="sign_password_id">Password:</label>
+			<input type="password"  name="sign_password" id="sign_password_id" placeholder="Password"/>				
+			<label for="sign_mail_id">Mail:</label>
+			<input type="text" name="sign_mail" id="sign_mail_id" placeholder="mail"/>		
+			<label for="sign_name_id">Name:</label>
+			<input type="text" name="sign_name" id="sign_name_id" placeholder="name"/>		
 		</div>
+		<br/>
+		<button data-role="button" id="signup_start" data-icon="plus" data-theme="b">Signup</button>		
+		<br/>			
 	</div>
-
-	<div data-role="content">	
-		<p id="login_status"></p>
-			<div data-role="fieldcontain" class="ui-hide-label">
-				<label for="login_id_login_idlabel">login:</label>
-				<input type="text" name="login" id="login_id" placeholder="login"/>
-				<label for="password_id">Password:</label>
-				<input type="text" name="password" id="password_id" placeholder="Password"/>				
-			</div>
-
-			<button data-role="button" id="login_start" data-icon="check">Login</button>
-			<button data-role="button" id="login_stop" data-icon="delete">Logout</button>
-
-			<p id="login_info"></p>
-		
-		
-	</div>
-
-
+	
+	<div data-role="footer">
+		<span style="float:right;color:black"><h4>2013 - ProxyTweet POC</h4></span>
+	</div>	
 </div><!-- /page -->
+
 
 <!-- Start of the proxytweet page -->
 <div data-role="page" id="proxytweet">
 
     <div data-role="header">
-        <h1>Proxytweet</h1>
-        
-        <div data-role="navbar">
-			<ul>
-				<li><a href="#home" data-transition="none" data-icon="home">Home</a></li>
-				<li><a href="#signup" data-transition="none" data-icon="plus">Signup</a></li>
-				<li><a href="#login" data-transition="none" data-icon="arrow-d">Login</a></li>				
-				<li><a href="#proxytweet" data-transition="none" data-icon="gear">Proxy Tweets</a></li>
-			</ul>
-        </div>
+        <h1>ProxyTweets</h1>        
     </div>
 
     <div data-role="content">	
-	
+		<h2>Local Tweets</h2>
+		<br/>
         <ul data-role="listview" id="proxytweet_list">
 
-        </ul>
-
+        </ul>	
+        <br/>	
 		<div data-role="fieldcontain" class="ui-hide-label">
 			<label for="tweet_message_id">Your tweet:</label>
-			<input type="text" name="tweet_message" id="tweet_message_id" placeholder="Your Tweet"/>			
-		</div>	
-	
-		<button data-role="button" id="posttweet" data-icon="plus">Post Tweet</button>		
-		
+			<input type="text" name="tweet_message" id="tweet_message_id" placeholder="Your Tweet" />			
+		</div>			
+		<br/>
+		<button data-role="button" id="posttweet" data-icon="plus" data-theme="b" >Post Tweet</button>	
+							
+		<p id="position_info"></p>	
+		<br/>		
+		<button data-role="button" id="login_stop" data-icon="delete"  data-theme="e" >Logout</button>		
+		<br/>	
 	</div>
-
+	
+	<div data-role="footer">
+		<span style="float:right;color:black"><h4>2013 - ProxyTweet POC</h4></span>
+	</div>
 </div><!-- /page -->
 
 
