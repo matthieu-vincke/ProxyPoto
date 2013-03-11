@@ -1,0 +1,16 @@
+<style type="text/css"> 
+    table { width:100%; }
+    table caption { text-align:left;  }
+    table thead th { text-align:left; border-bottom-width:1px; border-top-width:1px; }
+    table th, td { text-align:left; padding:6px;} 
+	.headertweet { text-align:left; padding:6px;background-color:#4D81B3;color:white;} 
+	.tweet { text-align:left; padding:6px;background-color:#ffffff;color:black;} 	
+	.listheader { text-align:left; padding:6px;background-color:#333333;color:white;} 	
+	.listitem  { text-align:left; padding:6px;background-color:#4D81B3;color:black;} 	
+	
+.ui-navmenu-content-transform {
+-webkit-transform: translate3d(0,0,0);
+-moz-transform: translate3d(0,0,0);
+transform: translate3d(0,0,0);
+}
+</style> 
